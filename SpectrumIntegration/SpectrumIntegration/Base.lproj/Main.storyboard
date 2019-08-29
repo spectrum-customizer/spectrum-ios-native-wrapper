@@ -18,27 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-kR-kZN">
-                                <rect key="frame" x="49" y="759" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-kR-kZN">
+                                <rect key="frame" x="29" y="808" width="85" height="30"/>
                                 <state key="normal" title="Load Recipe"/>
                                 <connections>
                                     <action selector="loadRecipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YqL-oK-bbB"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="RecipeSet Id" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mh9-WW-hVf">
-                                <rect key="frame" x="223" y="760" width="156" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="RecipeSet Id" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mh9-WW-hVf">
+                                <rect key="frame" x="20" y="758" width="103" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Krd-pW-9R9" customClass="SpectrumCustomizerView" customModule="SpectrumCustomizer">
+                                <rect key="frame" x="20" y="44" width="374" height="692"/>
+                                <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIN-Ya-5vd">
+                                <rect key="frame" x="309" y="808" width="85" height="30"/>
+                                <state key="normal" title="Load SKU 2"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jja-rc-XD9">
+                                <rect key="frame" x="309" y="758" width="85" height="30"/>
+                                <state key="normal" title="Load SKU 1"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jja-rc-XD9" firstAttribute="top" secondItem="mh9-WW-hVf" secondAttribute="top" id="23v-eC-1S7"/>
+                            <constraint firstItem="IIN-Ya-5vd" firstAttribute="trailing" secondItem="Jja-rc-XD9" secondAttribute="trailing" id="2mA-AJ-eOS"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2y8-UO-fcL"/>
+                            <constraint firstItem="QXp-kR-kZN" firstAttribute="centerX" secondItem="mh9-WW-hVf" secondAttribute="centerX" id="C3x-5Y-bh1"/>
+                            <constraint firstAttribute="bottom" secondItem="Krd-pW-9R9" secondAttribute="bottom" constant="160" id="F5T-le-TEb"/>
+                            <constraint firstItem="mh9-WW-hVf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="J8s-Et-qMx"/>
+                            <constraint firstItem="IIN-Ya-5vd" firstAttribute="trailing" secondItem="Krd-pW-9R9" secondAttribute="trailing" id="Jcg-9a-nam"/>
+                            <constraint firstItem="mh9-WW-hVf" firstAttribute="top" secondItem="Krd-pW-9R9" secondAttribute="bottom" constant="22" id="R62-q0-yvX"/>
+                            <constraint firstItem="IIN-Ya-5vd" firstAttribute="top" secondItem="QXp-kR-kZN" secondAttribute="top" id="RMb-1w-D5d"/>
+                            <constraint firstItem="Jja-rc-XD9" firstAttribute="trailing" secondItem="Krd-pW-9R9" secondAttribute="trailing" id="Rnb-zL-42u"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Sac-ao-5m4"/>
+                            <constraint firstItem="IIN-Ya-5vd" firstAttribute="width" secondItem="Jja-rc-XD9" secondAttribute="width" id="V9d-rj-ve8"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YRP-Vc-jrQ"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bCE-so-KPS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Krd-pW-9R9" secondAttribute="trailing" id="ed0-Oc-PJ5"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="leading" secondItem="mh9-WW-hVf" secondAttribute="leading" id="fEN-uU-Wcz"/>
+                            <constraint firstItem="QXp-kR-kZN" firstAttribute="top" secondItem="mh9-WW-hVf" secondAttribute="bottom" constant="20" id="fhs-Ld-qI8"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gmz-BY-3eY"/>
+                            <constraint firstItem="Krd-pW-9R9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocw-Ns-dU3"/>
+                            <constraint firstItem="QXp-kR-kZN" firstAttribute="width" secondItem="Jja-rc-XD9" secondAttribute="width" id="rTF-20-QFm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="readableId" destination="mh9-WW-hVf" id="teB-Oa-HIE"/>
+                        <outlet property="spectrum" destination="Krd-pW-9R9" id="uf8-8T-HKD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

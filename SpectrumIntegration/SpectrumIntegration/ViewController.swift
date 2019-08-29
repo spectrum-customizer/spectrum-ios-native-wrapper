@@ -11,16 +11,11 @@ import SpectrumCustomizer
 
 class ViewController: UIViewController {
   
-  let spectrum: SpectrumCustomizerView?
+  //let spectrum: SpectrumCustomizerView?
 
   @IBOutlet weak var readableId: UITextField!
+  @IBOutlet weak var spectrum: SpectrumCustomizerView!
   @IBAction func loadRecipe(_ sender: Any) {
-  }
-  
-  
-  
-  public required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
   }
   
   
@@ -28,9 +23,16 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     WebCacheCleaner.clean()
     
+    let customizerUrl = URL(string: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/index.html")
+    let request = URLRequest(url: customizerUrl!)
+    
+    spectrum.loadCustomizer(customizerUrl: request)
+    
+    /*
     // Do any additional setup after loading the view.
     //let bounds : CGRect = self.view.bounds
     let bounds : CGRect = CGRect(x: 20, y: 100, width: self.view.bounds.width - 20, height: self.view.bounds.height - 200)
+
     let spectrum = SpectrumCustomizerView(frame: bounds)
     
     let customizerUrl = URL(string: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/index.html")
@@ -39,5 +41,6 @@ class ViewController: UIViewController {
     spectrum.loadCustomizer(customizerUrl: request)
     self.view.addSubview(spectrum)
     self.view.sendSubviewToBack(spectrum)
+     */
   }
 }

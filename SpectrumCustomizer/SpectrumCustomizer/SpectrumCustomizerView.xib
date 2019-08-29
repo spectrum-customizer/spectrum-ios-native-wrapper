@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpectrumCustomizerView" customModule="SpectrumCustomizer" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="k2p-rh-ovK"/>
                 <outlet property="webView" destination="YgL-92-xy7" id="RSE-t0-bSw"/>
             </connections>
         </placeholder>
@@ -20,9 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgL-92-xy7">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgL-92-xy7">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -31,7 +31,18 @@
                 </wkWebView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="7YI-Dw-wnv"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G8J-ts-HFe"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IAZ-BN-Pfy"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="QSr-Up-UYp"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="cLt-51-tQr"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dVG-QD-gdq"/>
+                <constraint firstItem="YgL-92-xy7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uwH-1b-IQV"/>
+                <constraint firstAttribute="trailing" secondItem="YgL-92-xy7" secondAttribute="trailing" id="vVZ-Ba-h1o"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="23" y="42"/>
         </view>
     </objects>
 </document>

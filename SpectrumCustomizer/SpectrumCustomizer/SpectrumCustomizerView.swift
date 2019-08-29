@@ -13,10 +13,11 @@ public class SpectrumCustomizerView: UIView {
 
   //@IBOutlet weak var webView: WKWebView!
   //@IBOutlet weak var webView: WKWebView!
+  @IBOutlet var contentView: UIView!
   @IBOutlet weak var webView: WKWebView!
   
   let nibName = "SpectrumCustomizerView"
-  var contentView: UIView!
+ // var contentView: UIView!
   
   
   public override init(frame: CGRect) {
@@ -27,6 +28,30 @@ public class SpectrumCustomizerView: UIView {
   public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setUpView()
+  }
+  
+  private func setUpView() {
+    guard let bundle = Bundle(identifier: "com.pollinate.SpectrumCustomizer") else { return }
+    
+    //let nib = UINib(nibName: self.nibName, bundle: bundle)
+    //self.contentView = nib.instantiate(withOwner: self, options: nil).first as? UIView
+    //let nib = UINib(nibName: self.nibName, bundle: bundle)
+    //nib.instantiate(withOwner: self, options: nil).first
+    
+    bundle.loadNibNamed("SpectrumCustomizerView", owner: self, options: nil)
+    
+    addSubview(contentView)
+    contentView.frame = self.bounds
+    self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    
+    //webView.frame = self.bounds
+    
+    guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
+    
+    webView.loadFileURL(url, allowingReadAccessTo: url)
+    let request = URLRequest(url: url)
+    webView.load(request)
+    
   }
   
   public func loadCustomizer(customizerUrl: URLRequest) {
@@ -73,20 +98,5 @@ public class SpectrumCustomizerView: UIView {
     }
   }
   
-  private func setUpView() {
-    guard let bundle = Bundle(identifier: "com.pollinate.SpectrumCustomizer") else { return }
-    
-    let nib = UINib(nibName: self.nibName, bundle: bundle)
-    self.contentView = nib.instantiate(withOwner: self, options: nil).first as? UIView
-    webView.frame = self.bounds
-    addSubview(contentView)
-    
-    guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
-    
-    webView.loadFileURL(url, allowingReadAccessTo: url)
-    let request = URLRequest(url: url)
-    webView.load(request)
-    
-    contentView.center = self.center
-  }
+  
 }
