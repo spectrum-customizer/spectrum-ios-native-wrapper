@@ -10,7 +10,20 @@ import UIKit
 import SpectrumCustomizer
 
 class ViewController: UIViewController {
+  
+  let spectrum: SpectrumCustomizerView?
 
+  @IBOutlet weak var readableId: UITextField!
+  @IBAction func loadRecipe(_ sender: Any) {
+  }
+  
+  
+  
+  public required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     WebCacheCleaner.clean()

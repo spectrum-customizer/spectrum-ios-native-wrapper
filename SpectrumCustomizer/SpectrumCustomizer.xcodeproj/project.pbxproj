@@ -18,6 +18,7 @@
 		3AE8FDFE23149652006583D5 /* SpectrumArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */; };
 		3AE8FE032315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FE022315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift */; };
 		3AE8FE052315DA75006583D5 /* SpectrumAddToCartEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FE042315DA75006583D5 /* SpectrumAddToCartEventArgs.swift */; };
+		3AE8FE5523173019006583D5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8FE5423173019006583D5 /* index.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumArguments.swift; sourceTree = "<group>"; };
 		3AE8FE022315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAddToCartEventArgsTests.swift; sourceTree = "<group>"; };
 		3AE8FE042315DA75006583D5 /* SpectrumAddToCartEventArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAddToCartEventArgs.swift; sourceTree = "<group>"; };
+		3AE8FE5423173019006583D5 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = web/index.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		3AC80979230B47A0007680E6 /* SpectrumCustomizer */ = {
 			isa = PBXGroup;
 			children = (
+				3AE8FE5423173019006583D5 /* index.html */,
 				3AC8097A230B47A0007680E6 /* SpectrumCustomizer.h */,
 				3AC8097B230B47A0007680E6 /* Info.plist */,
 				3AC80991230B47ED007680E6 /* SpectrumCustomizerView.swift */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A36D25C230C6C6A00A50CDF /* SpectrumCustomizerView.xib in Resources */,
+				3AE8FE5523173019006583D5 /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,9 @@
                                 <rect key="frame" x="49" y="759" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Load Recipe"/>
+                                <connections>
+                                    <action selector="loadRecipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YqL-oK-bbB"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="RecipeSet Id" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mh9-WW-hVf">
                                 <rect key="frame" x="223" y="760" width="156" height="30"/>
@@ -34,6 +37,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="readableId" destination="mh9-WW-hVf" id="teB-Oa-HIE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

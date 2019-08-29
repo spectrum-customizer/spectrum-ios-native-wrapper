@@ -31,19 +31,6 @@ class SpectrumCustomizerViewTests: XCTestCase {
     XCTAssertNotNil(sut.webView)
   }
   
-  func test_LoadsCustomUrl() {
-    let blobStorageUri = "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/index.html"
-    let customizerUrl = URL(string: blobStorageUri)
-    let request = URLRequest(url: customizerUrl!)
-    sut.loadCustomizer(customizerUrl: request)
-    
-    if let loadedUrl = sut.webView.url {
-      XCTAssertEqual(loadedUrl.absoluteString, blobStorageUri)
-    } else {
-      XCTFail("Url no loaded")
-    }
-  }
-  
   func test_loadingARecipe() {
     let args = SpectrumArguments(containerSelector: "#main", recipeSetReadableId: "ABCD1245", productId: "123456")
   }

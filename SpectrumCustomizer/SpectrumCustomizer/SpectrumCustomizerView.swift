@@ -30,23 +30,63 @@ public class SpectrumCustomizerView: UIView {
   }
   
   public func loadCustomizer(customizerUrl: URLRequest) {
-    webView.load(customizerUrl)
+    //webView.load(customizerUrl)
+  }
+  
+  public func loadRecipe(args: SpectrumArguments) {
+    
+    let jsonEncoder = JSONEncoder();
+    
+    do {
+      let jsonData = try jsonEncoder.encode(args)
+      let jString = String(data: jsonData, encoding: .utf8)
+      
+      let serialized = "spectrum.loadRecipe('\(jString!)')"
+      
+      webView.evaluateJavaScript(serialized, completionHandler: {(html: AnyObject?, error: NSError?) in
+        print(html!)
+        } as? (Any?, Error?) -> Void)
+      
+    } catch {
+      print("error loading recipe")
+    }
+  }
+  
+  /**
+   */
+  public func loadSku(args: SpectrumArguments) {
+    
+    let jsonEncoder = JSONEncoder();
+    
+    do {
+      let jsonData = try jsonEncoder.encode(args)
+      let jString = String(data: jsonData, encoding: .utf8)
+      
+      let serialized = "spectrum.loadSku('\(jString!)')"
+      
+      webView.evaluateJavaScript(serialized, completionHandler: {(html: AnyObject?, error: NSError?) in
+        print(html!)
+        } as? (Any?, Error?) -> Void)
+      
+    } catch {
+      print("error loading recipe")
+    }
   }
   
   private func setUpView() {
-    let bundle = Bundle(for: type(of: self))
+    guard let bundle = Bundle(identifier: "com.pollinate.SpectrumCustomizer") else { return }
+    
     let nib = UINib(nibName: self.nibName, bundle: bundle)
     self.contentView = nib.instantiate(withOwner: self, options: nil).first as? UIView
-    
+    webView.frame = self.bounds
     addSubview(contentView)
     
-    let testUrl = URL(string:"https://google.com")
-    let request = URLRequest(url: testUrl!)
-    webView.frame = self.bounds
+    guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
+    
+    webView.loadFileURL(url, allowingReadAccessTo: url)
+    let request = URLRequest(url: url)
     webView.load(request)
     
     contentView.center = self.center
-    
-   
   }
 }
