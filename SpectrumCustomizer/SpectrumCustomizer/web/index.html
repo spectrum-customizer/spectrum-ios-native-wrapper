@@ -24,53 +24,54 @@
         </div>
        -->
         <div id="app"></div>
-        <script src="https://madetoorderdev.blob.core.windows.net/spectrum-native-test/frontend/customizer.js"></script>
+       
         <script>
-          (function () {
-         const addToCartBtn = document.getElementById('add-to-cart');
-         const shareBtn = document.getElementById('share');
-         const content = document.getElementById('content');
-         const from = document.getElementById('from');
+          
+         // (function () {
+           /*
+           const addToCartBtn = document.getElementById('add-to-cart');
+           const shareBtn = document.getElementById('share');
+           const content = document.getElementById('content');
+           const from = document.getElementById('from');
+            */
 
-         let bought = 0;
-         let shared = 0;
 
-         function randomLetter() {
-           const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-           return characters.charAt(Math.floor(Math.random() * characters.length));
-         }
+           function randomLetter() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            return characters.charAt(Math.floor(Math.random() * characters.length));
+           }
 
-         function randomDigit() {
-           return Math.floor(Math.random() * 10);
-         }
+           function randomDigit() {
+            return Math.floor(Math.random() * 10);
+           }
 
-         function generateRandomSeries(amount, builder) {
-           return [...Array(amount).keys()].map(x => builder());
-         }
+           function generateRandomSeries(amount, builder) {
+            return [...Array(amount).keys()].map(x => builder());
+           }
 
-         function letterSeries(amount) {
-           return generateRandomSeries(amount, randomLetter).join('');
-         }
+           function letterSeries(amount) {
+            return generateRandomSeries(amount, randomLetter).join('');
+           }
 
-         function digitSeries(amount) {
-           return generateRandomSeries(amount, randomDigit).join('');
-         }
+           function digitSeries(amount) {
+            return generateRandomSeries(amount, randomDigit).join('');
+           }
          
 
-         function generateRandomReadableId() {
-           return `${letterSeries(3)}${digitSeries(4)}`;
-         }
+           function generateRandomReadableId() {
+            return `${letterSeries(3)}${digitSeries(4)}`;
+           }
 
-         function generateRandomSku() {
-           return `${digitSeries(5)}`;
-         }
+           function generateRandomSku() {
+            return `${digitSeries(5)}`;
+           }
 
-         function generateRandomImage() {
-           return {
-             s7Suffix: '',
-             compositeUrl: 'https://madetoorderdev.blob.core.windows.net/spectrum-native-test/800x600.png'
-           };
-         }
+           function generateRandomImage() {
+            return {
+              s7Suffix: '',
+              compositeUrl: 'https://madetoorderdev.blob.core.windows.net/spectrum-native-test/800x600.png'
+            };
+           }
 
 
          function generateRandomCartData() {
@@ -88,6 +89,7 @@
          }
          
 
+           /*
          addToCartBtn.addEventListener('click', () => {
            alert('added to cart');
            if (typeof window.SpectrumNative !== 'undefined') {
@@ -102,26 +104,25 @@
            window.SpectrumNative.shared(`Shared: ${shared}`);
          });
 
-         window.spectrum = {};
+         window.spectrum = window.spectrum || {};
 
-         window.spectrum.loadRecipe = function (recipeData) {
+            */
+        window.integration = window.integration || {};
+         window.integration.loadRecipe = function (recipeData) {
            console.log(recipeData);
-           from.innerHTML = 'Loaded Recipe';
-           
            var data = typeof recipeData === "string" ? JSON.parse(recipeData) : recipeData;
-
-           content.innerHTML = JSON.stringify(data, undefined, 2);
+            window.spectrum.fromCustomizer.switchRecipeSet(data.recipeSetReadableId)
          };
 
-         window.spectrum.loadSku = function (sku) {
+         window.integration.loadSku = function (sku) {
            console.log(sku);
-           from.innerHTML = 'Loaded Sku';
            var data = typeof sku === "string" ? JSON.parse(sku) : sku;
-           content.innerHTML = JSON.stringify(data, undefined, 2);
+           window.spectrum.fromCustomizer.goToProduct(data.productId)
          };
 
-         }());
+         //}());
 
         </script>
+         <script src="https://madetoorderdev.blob.core.windows.net/spectrum-native-test/frontend/customizer.js"></script>
     </body>
 </html>

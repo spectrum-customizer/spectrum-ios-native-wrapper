@@ -11,36 +11,31 @@ import SpectrumCustomizer
 
 class ViewController: UIViewController {
   
-  //let spectrum: SpectrumCustomizerView?
-
   @IBOutlet weak var readableId: UITextField!
   @IBOutlet weak var spectrum: SpectrumCustomizerView!
   @IBAction func loadRecipe(_ sender: Any) {
+    
+    let arg = SpectrumArguments(fromRecipeId: "P2LD9U6W")
+    spectrum.loadRecipe(args: arg)
+  }
+  
+  @IBAction func loadFirstSku(_ sender: Any) {
+    let product = "tmx-pro-guess-originals"
+    let arg = SpectrumArguments(fromSku: product)
+    spectrum.loadSku(args: arg)
+  }
+  
+  @IBAction func loadSkuTwo(_ sender: Any) {
+    let product = "tmx-pro-wilshire-38mm"
+    let arg = SpectrumArguments(fromSku: product)
+    spectrum.loadSku(args: arg)
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    WebCacheCleaner.clean()
+    //WebCacheCleaner.
     
-    let customizerUrl = URL(string: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/index.html")
-    let request = URLRequest(url: customizerUrl!)
     
-    spectrum.loadCustomizer(customizerUrl: request)
-    
-    /*
-    // Do any additional setup after loading the view.
-    //let bounds : CGRect = self.view.bounds
-    let bounds : CGRect = CGRect(x: 20, y: 100, width: self.view.bounds.width - 20, height: self.view.bounds.height - 200)
-
-    let spectrum = SpectrumCustomizerView(frame: bounds)
-    
-    let customizerUrl = URL(string: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/index.html")
-    let request = URLRequest(url: customizerUrl!)
-    
-    spectrum.loadCustomizer(customizerUrl: request)
-    self.view.addSubview(spectrum)
-    self.view.sendSubviewToBack(spectrum)
-     */
   }
 }

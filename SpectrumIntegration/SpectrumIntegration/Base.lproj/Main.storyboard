@@ -33,15 +33,20 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Krd-pW-9R9" customClass="SpectrumCustomizerView" customModule="SpectrumCustomizer">
                                 <rect key="frame" x="20" y="44" width="374" height="692"/>
-                                <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIN-Ya-5vd">
                                 <rect key="frame" x="309" y="808" width="85" height="30"/>
                                 <state key="normal" title="Load SKU 2"/>
+                                <connections>
+                                    <action selector="loadSkuTwo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JRF-s1-Fnl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jja-rc-XD9">
                                 <rect key="frame" x="309" y="758" width="85" height="30"/>
                                 <state key="normal" title="Load SKU 1"/>
+                                <connections>
+                                    <action selector="loadFirstSku:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uUe-Uo-EoR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
