@@ -16,17 +16,20 @@
         <button id="add-to-cart">Add to Cart</button>
         <button id="share">Share</button>
         <h4>Messages</h4>
-       
+
         <p id="from"></p>
-       
+
         <div>
             <pre id="content"></pre>
         </div>
        -->
-        <div id="app"></div>
-       
         <script>
-          
+          window.customizerWrapperId = 'spectrum-customizer';
+        </script>
+        <div id="spectrum-customizer"></div>
+
+        <script>
+
          // (function () {
            /*
            const addToCartBtn = document.getElementById('add-to-cart');
@@ -56,7 +59,7 @@
            function digitSeries(amount) {
             return generateRandomSeries(amount, randomDigit).join('');
            }
-         
+
 
            function generateRandomReadableId() {
             return `${letterSeries(3)}${digitSeries(4)}`;
@@ -87,7 +90,7 @@
            };
 
          }
-         
+
 
            /*
          addToCartBtn.addEventListener('click', () => {
@@ -120,9 +123,39 @@
            window.spectrum.fromCustomizer.goToProduct(data.productId)
          };
 
+        window.integration.addToCart = function(skus, recipeSetId, options) {
+            if (typeof window.SpectrumNative !== 'undefined') {
+              window.SpectrumNative.addedToCart(JSON.stringify(generateRandomCartData()));
+            } else if (typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
+
+
+              let cartData = {
+                skus: skus,
+                recipeSetId: recipeSetId,
+                options: options
+              };
+              /*
+              let cartData = {
+                param1: 'Hello',
+                param2: 42
+              }
+               */
+              window.webkit.messageHandlers.addToCart.postMessage(cartData);
+            }
+        }
+
          //}());
 
+         window.loadCustomizer = function (script) {
+
+           let elem = document.createElement('script');
+           elem.src = script;
+           //let elem = document.createElement('h1');
+           //elem.innerText = script;
+           document.getElementsByTagName('body')[0].append(elem);
+           //alert('LOADED!')
+         }
+
         </script>
-         <script src="https://madetoorderdev.blob.core.windows.net/spectrum-native-test/frontend/customizer.js"></script>
     </body>
 </html>

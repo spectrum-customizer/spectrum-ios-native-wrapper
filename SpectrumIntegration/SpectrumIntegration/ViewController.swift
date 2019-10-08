@@ -35,7 +35,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     //WebCacheCleaner.
-    
+    spectrum.loadCustomizer(customizerUrl: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/app.js")
     
   }
 }

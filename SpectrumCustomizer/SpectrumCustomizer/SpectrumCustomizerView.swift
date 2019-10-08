@@ -9,12 +9,36 @@
 import UIKit
 import WebKit
 
-public class SpectrumCustomizerView: UIView {
+ let spectrumMessageHandler = "addToCart"
+
+extension SpectrumCustomizerView: WKScriptMessageHandler {
+  
+  public func userContentController(_ userContentController: WKUserContentController,
+                             didReceive message: WKScriptMessage) {
+    if message.name == spectrumMessageHandler {
+      guard let dict = message.body as? [String: AnyObject],
+        let recipeSetId = dict["recipeSetId"] as? String,
+        let skus = dict["skus"] as? [String],
+        let options = dict["options"] as? [String: String] else {
+          return
+      }
+      print(recipeSetId)
+      print(skus)
+      print(options)
+    }
+  }
+}
+
+public class SpectrumCustomizerView: UIView, WKNavigationDelegate {
 
   @IBOutlet var contentView: UIView!
   @IBOutlet weak var webView: WKWebView!
   
   let nibName = "SpectrumCustomizerView"
+ 
+  var customizerSource = ""
+  var webViewReady = false
+  var webSourceLoaded = false
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -26,6 +50,13 @@ public class SpectrumCustomizerView: UIView {
     setUpView()
   }
   
+  public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    if !webSourceLoaded && customizerSource != "" {
+      load(customizerUrl: customizerSource)
+      webSourceLoaded = true
+    }
+  }
+  
   private func setUpView() {
     guard let bundle = Bundle(identifier: "com.pollinate.SpectrumCustomizer") else { return }
     
@@ -35,16 +66,21 @@ public class SpectrumCustomizerView: UIView {
     contentView.frame = self.bounds
     self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     
+    webView.navigationDelegate = self;
+    webView.configuration.userContentController.add(self, name: spectrumMessageHandler)
     guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
-    
     webView.loadFileURL(url, allowingReadAccessTo: url)
-    let request = URLRequest(url: url)
-    webView.load(request)
-    
   }
+ 
   
-  public func loadCustomizer(customizerUrl: URLRequest) {
-    //webView.load(customizerUrl)
+  
+  public func loadCustomizer(customizerUrl: String) {
+    if webViewReady {
+      load(customizerUrl: customizerUrl)
+      webSourceLoaded = true
+    } else {
+      customizerSource = customizerUrl
+    }
   }
   
   public func loadRecipe(args: SpectrumArguments) {
@@ -66,6 +102,12 @@ public class SpectrumCustomizerView: UIView {
     }
   }
   
+  func load(customizerUrl: String) {
+    let script = "loadCustomizer('" + customizerUrl + "')"
+       webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
+           print(html!)
+       } as? (Any?, Error?) -> Void)
+  }
   /**
    */
   public func loadSku(args: SpectrumArguments) {
