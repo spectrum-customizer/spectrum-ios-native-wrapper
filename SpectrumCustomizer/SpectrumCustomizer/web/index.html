@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Spectrum Customizer</title>
-        <style>
+<head>
+    <title>Spectrum Customizer</title>
+    <style>
          body {
            font-family: Arial, Helvetica, sans-serif;
            background-color: #eee;
          }
         </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1" >
-    </head>
-    <body>
-        <div id="spectrum-customizer"></div>
-        <script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+</head>
+<body>
+<div id="spectrum-customizer"></div>
+<script>
+          window.customizerWrapperId = 'spectrum-customizer';
+</script>
+
+<script>
 
          window.customizerWrapperId = 'spectrum-customizer';
 
          window.pendingPriceUpdates = {};
 
-         window.integration = window.integration || {};
-
-         window.integration.loadRecipe = function (recipeData) {
-           console.log(recipeData);
-           var data = typeof recipeData === "string" ? JSON.parse(recipeData) : recipeData;
-           window.spectrum.fromCustomizer.switchRecipeSet(data.recipeSetReadableId)
-         };
-
-         window.integration.loadSku = function (sku) {
-           console.log(sku);
-           var data = typeof sku === "string" ? JSON.parse(sku) : sku;
-           window.spectrum.fromCustomizer.goToProduct(data.productId)
-         };
-
-         window.integration.addToCart = function(skus, recipeSetId, options) {
+         window.spectrumAddToCart = function(skus, recipeSetId, options) {
 
            let cartData = {
              skus: skus,
@@ -41,13 +31,13 @@
            };
 
            if (typeof window.SpectrumNative !== 'undefined') {
-             window.SpectrumNative.addedToCart(JSON.stringify(cartData));
+             window.SpectrumNative.addToCart(JSON.stringify(cartData));
            } else if (window.webkit && typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
              window.webkit.messageHandlers.addToCart.postMessage(cartData);
            }
          }
 
-         window.integration.spectrumGetPriceAndInventory = function (skus, options) {
+         window.spectrumGetPriceAndInventory = function (skus, options) {
 
            return new Promise((resolve, reject) => {
 
@@ -91,5 +81,5 @@
          }
 
         </script>
-    </body>
+</body>
 </html>
