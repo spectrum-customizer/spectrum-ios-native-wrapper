@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0EC6D9234E3FC700B267BF /* SpectrumPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */; };
 		3A36D25C230C6C6A00A50CDF /* SpectrumCustomizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */; };
 		3AC80981230B47A0007680E6 /* SpectrumCustomizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC80977230B47A0007680E6 /* SpectrumCustomizer.framework */; };
 		3AC80986230B47A0007680E6 /* SpectrumCustomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC80985230B47A0007680E6 /* SpectrumCustomizerTests.swift */; };
@@ -16,8 +17,6 @@
 		3AE8FDFA231480C5006583D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE8FDF9231480C5006583D5 /* WebKit.framework */; };
 		3AE8FDFC231495EF006583D5 /* SpectrumArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FDFB231495EF006583D5 /* SpectrumArgumentTests.swift */; };
 		3AE8FDFE23149652006583D5 /* SpectrumArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */; };
-		3AE8FE032315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FE022315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift */; };
-		3AE8FE052315DA75006583D5 /* SpectrumAddToCartEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FE042315DA75006583D5 /* SpectrumAddToCartEventArgs.swift */; };
 		3AE8FE5523173019006583D5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8FE5423173019006583D5 /* index.html */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumPrice.swift; sourceTree = "<group>"; };
 		3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpectrumCustomizerView.xib; sourceTree = "<group>"; };
 		3AC80977230B47A0007680E6 /* SpectrumCustomizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectrumCustomizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC8097A230B47A0007680E6 /* SpectrumCustomizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpectrumCustomizer.h; sourceTree = "<group>"; };
@@ -44,8 +44,6 @@
 		3AE8FDF9231480C5006583D5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3AE8FDFB231495EF006583D5 /* SpectrumArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumArgumentTests.swift; sourceTree = "<group>"; };
 		3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumArguments.swift; sourceTree = "<group>"; };
-		3AE8FE022315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAddToCartEventArgsTests.swift; sourceTree = "<group>"; };
-		3AE8FE042315DA75006583D5 /* SpectrumAddToCartEventArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAddToCartEventArgs.swift; sourceTree = "<group>"; };
 		3AE8FE5423173019006583D5 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = web/index.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,7 @@
 				3AC80991230B47ED007680E6 /* SpectrumCustomizerView.swift */,
 				3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */,
 				3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */,
-				3AE8FE042315DA75006583D5 /* SpectrumAddToCartEventArgs.swift */,
+				3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */,
 			);
 			path = SpectrumCustomizer;
 			sourceTree = "<group>";
@@ -109,7 +107,6 @@
 				3AC80987230B47A0007680E6 /* Info.plist */,
 				3AE8FDF523146A50006583D5 /* SpectrumCustomizerViewTests.swift */,
 				3AE8FDFB231495EF006583D5 /* SpectrumArgumentTests.swift */,
-				3AE8FE022315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift */,
 			);
 			path = SpectrumCustomizerTests;
 			sourceTree = "<group>";
@@ -233,8 +230,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0EC6D9234E3FC700B267BF /* SpectrumPrice.swift in Sources */,
 				3AC80992230B47ED007680E6 /* SpectrumCustomizerView.swift in Sources */,
-				3AE8FE052315DA75006583D5 /* SpectrumAddToCartEventArgs.swift in Sources */,
 				3AE8FDFE23149652006583D5 /* SpectrumArguments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +242,6 @@
 			files = (
 				3AE8FDF623146A50006583D5 /* SpectrumCustomizerViewTests.swift in Sources */,
 				3AC80986230B47A0007680E6 /* SpectrumCustomizerTests.swift in Sources */,
-				3AE8FE032315D9D9006583D5 /* SpectrumAddToCartEventArgsTests.swift in Sources */,
 				3AE8FDFC231495EF006583D5 /* SpectrumArgumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

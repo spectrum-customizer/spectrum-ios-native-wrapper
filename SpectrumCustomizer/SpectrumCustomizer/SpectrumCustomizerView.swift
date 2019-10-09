@@ -9,30 +9,20 @@
 import UIKit
 import WebKit
 
- let spectrumMessageHandler = "addToCart"
+let addToCart = "addToCart"
+let getPrice = "getPrice"
 
-extension SpectrumCustomizerView: WKScriptMessageHandler {
-  
-  public func userContentController(_ userContentController: WKUserContentController,
-                             didReceive message: WKScriptMessage) {
-    if message.name == spectrumMessageHandler {
-      guard let dict = message.body as? [String: AnyObject],
-        let recipeSetId = dict["recipeSetId"] as? String,
-        let skus = dict["skus"] as? [String],
-        let options = dict["options"] as? [String: String] else {
-          return
-      }
-      print(recipeSetId)
-      print(skus)
-      print(options)
-    }
-  }
+public protocol SpectrumCustomizerViewDelegate: class {
+  func addToCart(sender: SpectrumCustomizerView, skus: [String], recipeSetId: String, options: [String: String])
+  func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice]
 }
 
-public class SpectrumCustomizerView: UIView, WKNavigationDelegate {
+public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
 
   @IBOutlet var contentView: UIView!
   @IBOutlet weak var webView: WKWebView!
+  
+  weak public var delegate:SpectrumCustomizerViewDelegate?
   
   let nibName = "SpectrumCustomizerView"
  
@@ -67,7 +57,8 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate {
     self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     
     webView.navigationDelegate = self;
-    webView.configuration.userContentController.add(self, name: spectrumMessageHandler)
+    webView.configuration.userContentController.add(self, name: addToCart)
+     webView.configuration.userContentController.add(self, name: getPrice)
     guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
     webView.loadFileURL(url, allowingReadAccessTo: url)
   }
@@ -129,5 +120,39 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate {
     }
   }
   
-  
-}
+  public func userContentController(_ userContentController: WKUserContentController,
+                             didReceive message: WKScriptMessage) {
+    if message.name == addToCart {
+      guard let dict = message.body as? [String: AnyObject],
+        let recipeSetId = dict["recipeSetId"] as? String,
+        let skus = dict["skus"] as? [String],
+        let options = dict["options"] as? [String: String] else {
+          return
+      }
+      
+      delegate?.addToCart(sender: self, skus: skus, recipeSetId: recipeSetId, options: options)
+      
+    } else if message.name == getPrice {
+    
+      guard let dict = message.body as? [String: AnyObject],
+        let callbackId = dict["callbackId"] as? Int,
+        let skus = dict["skus"] as? [String],
+        let options = dict["options"] as? [String: String] else {
+          return
+      }
+      
+      let prices = delegate?.getPrice(sender: self, skus: skus, options: options)
+      
+      let jsonEncoder = JSONEncoder()
+      if let unWrappedPrices = prices,
+        let pricesJson = try? jsonEncoder.encode(unWrappedPrices),
+        let pricesText = String(data: pricesJson, encoding: String.Encoding.utf8) {
+      
+        let script = "resolvePrice(" + String(callbackId) + ", " + pricesText + ");"
+        webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
+        print(html!)
+        } as? (Any?, Error?) -> Void)
+      }
+     }
+   }
+ }

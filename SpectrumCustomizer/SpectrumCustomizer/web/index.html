@@ -11,110 +11,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" >
     </head>
     <body>
-      <!--
-        <h2>Customizer</h2>
-        <button id="add-to-cart">Add to Cart</button>
-        <button id="share">Share</button>
-        <h4>Messages</h4>
-
-        <p id="from"></p>
-
-        <div>
-            <pre id="content"></pre>
-        </div>
-       -->
-        <script>
-          window.customizerWrapperId = 'spectrum-customizer';
-        </script>
         <div id="spectrum-customizer"></div>
-
         <script>
 
-         // (function () {
-           /*
-           const addToCartBtn = document.getElementById('add-to-cart');
-           const shareBtn = document.getElementById('share');
-           const content = document.getElementById('content');
-           const from = document.getElementById('from');
-            */
+         window.customizerWrapperId = 'spectrum-customizer';
 
+         window.pendingPriceUpdates = {};
 
-           function randomLetter() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            return characters.charAt(Math.floor(Math.random() * characters.length));
-           }
+         window.integration = window.integration || {};
 
-           function randomDigit() {
-            return Math.floor(Math.random() * 10);
-           }
-
-           function generateRandomSeries(amount, builder) {
-            return [...Array(amount).keys()].map(x => builder());
-           }
-
-           function letterSeries(amount) {
-            return generateRandomSeries(amount, randomLetter).join('');
-           }
-
-           function digitSeries(amount) {
-            return generateRandomSeries(amount, randomDigit).join('');
-           }
-
-
-           function generateRandomReadableId() {
-            return `${letterSeries(3)}${digitSeries(4)}`;
-           }
-
-           function generateRandomSku() {
-            return `${digitSeries(5)}`;
-           }
-
-           function generateRandomImage() {
-            return {
-              s7Suffix: '',
-              compositeUrl: 'https://madetoorderdev.blob.core.windows.net/spectrum-native-test/800x600.png'
-            };
-           }
-
-
-         function generateRandomCartData() {
-
-           return {
-             recipeSetReadableId: generateRandomReadableId(),
-             baseSku: generateRandomSku(),
-             jacronSku: generateRandomSku(),
-             spectrumImageUrls: [
-               generateRandomImage(),
-               generateRandomImage()
-             ]
-           };
-
-         }
-
-
-           /*
-         addToCartBtn.addEventListener('click', () => {
-           alert('added to cart');
-           if (typeof window.SpectrumNative !== 'undefined') {
-             window.SpectrumNative.addedToCart(JSON.stringify(generateRandomCartData()));
-           } else if (typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
-             window.webkit.messageHandlers.addToCart.postMessage(generateRandomCartData());
-           }
-         });
-
-         shareBtn.addEventListener('click', () => {
-           shared+=1;
-           window.SpectrumNative.shared(`Shared: ${shared}`);
-         });
-
-         window.spectrum = window.spectrum || {};
-
-            */
-        window.integration = window.integration || {};
          window.integration.loadRecipe = function (recipeData) {
            console.log(recipeData);
            var data = typeof recipeData === "string" ? JSON.parse(recipeData) : recipeData;
-            window.spectrum.fromCustomizer.switchRecipeSet(data.recipeSetReadableId)
+           window.spectrum.fromCustomizer.switchRecipeSet(data.recipeSetReadableId)
          };
 
          window.integration.loadSku = function (sku) {
@@ -123,37 +32,62 @@
            window.spectrum.fromCustomizer.goToProduct(data.productId)
          };
 
-        window.integration.addToCart = function(skus, recipeSetId, options) {
-            if (typeof window.SpectrumNative !== 'undefined') {
-              window.SpectrumNative.addedToCart(JSON.stringify(generateRandomCartData()));
-            } else if (typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
+         window.integration.addToCart = function(skus, recipeSetId, options) {
 
+           let cartData = {
+             skus: skus,
+             recipeSetId: recipeSetId,
+             options: options
+           };
 
-              let cartData = {
-                skus: skus,
-                recipeSetId: recipeSetId,
-                options: options
-              };
-              /*
-              let cartData = {
-                param1: 'Hello',
-                param2: 42
-              }
-               */
-              window.webkit.messageHandlers.addToCart.postMessage(cartData);
-            }
-        }
+           if (typeof window.SpectrumNative !== 'undefined') {
+             window.SpectrumNative.addedToCart(JSON.stringify(cartData));
+           } else if (window.webkit && typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
+             window.webkit.messageHandlers.addToCart.postMessage(cartData);
+           }
+         }
 
-         //}());
+         window.integration.spectrumGetPriceAndInventory = function (skus, options) {
+
+           return new Promise((resolve, reject) => {
+
+             const callbackId = generateId();
+
+             window.pendingPriceUpdates[callbackId] = {
+               resolve: resolve,
+               reject: reject
+             };
+
+             const priceData = {
+               callbackId: callbackId,
+               skus: skus,
+               options: options
+             };
+
+             if (typeof window.SpectrumNative !== 'undefined') {
+               window.SpectrumNative.getPrice(JSON.stringify(priceData));
+             } else if (window.webkit && typeof window.webkit.messageHandlers.addToCart !== 'undefined') {
+               window.webkit.messageHandlers.getPrice.postMessage(priceData);
+             } else {
+               reject();
+             }
+           });
+         }
+
+         function resolvePrice(callbackId, prices) {
+           if (window.pendingPriceUpdates.hasOwnProperty(callbackId)) {
+             window.pendingPriceUpdates[callbackId].resolve(prices);
+           }
+         }
+
+         function generateId() {
+           return parseInt(Math.random() * 10000000);
+         }
 
          window.loadCustomizer = function (script) {
-
            let elem = document.createElement('script');
            elem.src = script;
-           //let elem = document.createElement('h1');
-           //elem.innerText = script;
            document.getElementsByTagName('body')[0].append(elem);
-           //alert('LOADED!')
          }
 
         </script>
