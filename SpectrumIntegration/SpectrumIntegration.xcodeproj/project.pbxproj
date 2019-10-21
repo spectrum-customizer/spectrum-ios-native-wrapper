@@ -13,8 +13,8 @@
 		3A36D1FC230C659E00A50CDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A36D1FB230C659E00A50CDF /* Assets.xcassets */; };
 		3A36D1FF230C659E00A50CDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A36D1FD230C659E00A50CDF /* LaunchScreen.storyboard */; };
 		3A36D20A230C659E00A50CDF /* SpectrumIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36D209230C659E00A50CDF /* SpectrumIntegrationTests.swift */; };
-		3A36D256230C68EF00A50CDF /* SpectrumCustomizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A36D253230C68E300A50CDF /* SpectrumCustomizer.framework */; };
-		3A36D257230C68EF00A50CDF /* SpectrumCustomizer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A36D253230C68E300A50CDF /* SpectrumCustomizer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A71B6C3235E23BC008CD572 /* SpectrumCustomizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A36D253230C68E300A50CDF /* SpectrumCustomizer.framework */; };
+		3A71B6C4235E23BC008CD572 /* SpectrumCustomizer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A36D253230C68E300A50CDF /* SpectrumCustomizer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AE8FE002314A44B006583D5 /* WebCacheCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FDFF2314A44B006583D5 /* WebCacheCleaner.swift */; };
 		3AE8FE4F23172640006583D5 /* LoadRecipeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8FE4E23172640006583D5 /* LoadRecipeUITests.swift */; };
 /* End PBXBuildFile section */
@@ -41,13 +41,6 @@
 			remoteGlobalIDString = 3AC80980230B47A0007680E6;
 			remoteInfo = SpectrumCustomizerTests;
 		};
-		3A36D258230C68EF00A50CDF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A36D24D230C68E300A50CDF /* SpectrumCustomizer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3AC80976230B47A0007680E6;
-			remoteInfo = SpectrumCustomizer;
-		};
 		3AE8FE4923172405006583D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A36D1E9230C659C00A50CDF /* Project object */;
@@ -58,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3A36D25A230C68EF00A50CDF /* Embed Frameworks */ = {
+		3A71B6C5235E23BD008CD572 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3A36D257230C68EF00A50CDF /* SpectrumCustomizer.framework in Embed Frameworks */,
+				3A71B6C4235E23BC008CD572 /* SpectrumCustomizer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A36D256230C68EF00A50CDF /* SpectrumCustomizer.framework in Frameworks */,
+				3A71B6C3235E23BC008CD572 /* SpectrumCustomizer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +116,7 @@
 				3A36D208230C659E00A50CDF /* SpectrumIntegrationTests */,
 				3AE8FE4523172405006583D5 /* SpectrumIntegrationUITests */,
 				3A36D1F2230C659C00A50CDF /* Products */,
+				3A71B6C2235E23BC008CD572 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +162,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3A71B6C2235E23BC008CD572 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3AE8FE4523172405006583D5 /* SpectrumIntegrationUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,12 +188,11 @@
 				3A36D1ED230C659C00A50CDF /* Sources */,
 				3A36D1EE230C659C00A50CDF /* Frameworks */,
 				3A36D1EF230C659C00A50CDF /* Resources */,
-				3A36D25A230C68EF00A50CDF /* Embed Frameworks */,
+				3A71B6C5235E23BD008CD572 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A36D259230C68EF00A50CDF /* PBXTargetDependency */,
 			);
 			name = SpectrumIntegration;
 			productName = SpectrumIntegration;
@@ -243,7 +243,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
-				ORGANIZATIONNAME = Pollinate;
+				ORGANIZATIONNAME = Spectrum;
 				TargetAttributes = {
 					3A36D1F0230C659C00A50CDF = {
 						CreatedOnToolsVersion = 10.3;
@@ -362,11 +362,6 @@
 			isa = PBXTargetDependency;
 			target = 3A36D1F0230C659C00A50CDF /* SpectrumIntegration */;
 			targetProxy = 3A36D206230C659E00A50CDF /* PBXContainerItemProxy */;
-		};
-		3A36D259230C68EF00A50CDF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SpectrumCustomizer;
-			targetProxy = 3A36D258230C68EF00A50CDF /* PBXContainerItemProxy */;
 		};
 		3AE8FE4A23172405006583D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -514,7 +509,6 @@
 		3A36D20F230C659E00A50CDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -535,7 +529,6 @@
 		3A36D210230C659E00A50CDF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

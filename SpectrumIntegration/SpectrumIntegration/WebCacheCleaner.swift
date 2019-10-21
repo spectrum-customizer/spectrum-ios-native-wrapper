@@ -2,9 +2,7 @@
 //  WebCacheCleaner.swift
 //  SpectrumIntegration
 //
-//  Created by Tom Falkner on 8/26/19.
-//  Copyright © 2019 Pollinate. All rights reserved.
-//
+
 
 import Foundation
 import WebKit

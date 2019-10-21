@@ -177,7 +177,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
-				ORGANIZATIONNAME = Pollinate;
+				ORGANIZATIONNAME = Spectrum;
 				TargetAttributes = {
 					3AC80976230B47A0007680E6 = {
 						CreatedOnToolsVersion = 10.3;
@@ -396,7 +396,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pollinate.SpectrumCustomizer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpectrumCustomizer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -422,7 +422,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pollinate.SpectrumCustomizer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpectrumCustomizer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

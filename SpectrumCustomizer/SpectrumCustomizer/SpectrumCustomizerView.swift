@@ -2,8 +2,8 @@
 //  SpectrumCustomizerView.swift
 //  SpectrumCustomizer
 //
-//  Created by Tom Falkner on 8/19/19.
-//  Copyright © 2019 Pollinate. All rights reserved.
+//  Created by Spectrum on 8/19/19.
+//  Copyright © 2019 Spectrum. All rights reserved.
 //
 
 import UIKit
@@ -48,7 +48,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
   }
 
   private func setUpView() {
-    guard let bundle = Bundle(identifier: "com.pollinate.SpectrumCustomizer") else { return }
+    guard let bundle = Bundle(identifier: "com.SpectrumCustomizer") else { return }
 
     bundle.loadNibNamed("SpectrumCustomizerView", owner: self, options: nil)
 

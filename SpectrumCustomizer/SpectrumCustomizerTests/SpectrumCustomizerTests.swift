@@ -2,8 +2,8 @@
 //  SpectrumCustomizerTests.swift
 //  SpectrumCustomizerTests
 //
-//  Created by Tom Falkner on 8/19/19.
-//  Copyright © 2019 Pollinate. All rights reserved.
+//  Created by Spectrum on 8/19/19.
+//  Copyright © 2019 Spectrum. All rights reserved.
 //
 
 import XCTest
