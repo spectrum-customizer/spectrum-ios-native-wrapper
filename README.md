@@ -9,7 +9,7 @@ The Spectrum Customizer library provides a wrapper around a UIView with helper m
 Adding the library to a project
 -------------------------------
 
-First, download the project from TK. Then, in XCode:
+First, download the project from https://github.com/spectrum-customizer/spectrum-ios-native-wrapper. Then, in XCode:
 
 1. Click on the project
 2. Click on embedded binaries
