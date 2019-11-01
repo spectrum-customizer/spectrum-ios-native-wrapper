@@ -21,17 +21,6 @@ Adding a SpectrumView in Interface Builder
 
 Drag an instance of UIView from the Library onto the Storyboard. Select the new UIView and open the Identity Inspector. Change the class to 'SpectrumCustomizerView' and the module to Spectrum Customizer. Add an IBOutlet to the UIViewController that will be responsible for the SpectrumCustomizerView.
 
-Initializing the Customizer
----------------------------
-
-Use the SpectrumCustomizerView's loadCustomizer method to load the application. Internally the SpectrumCustomizerView has an HTML page that implements the necessary methods that Spectrum needs to interact with the host environment.
-
-```swift
-
-spectrum.loadCustomizer(customizerUrl: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/app.js")
-
-```
-
 Set up the SpectrumViewDelegate
 -------------------------------
 
@@ -48,7 +37,7 @@ public protocol SpectrumCustomizerViewDelegate: class {
 
 Here is the implementation of SpectrumPrice:
 
-```
+```swift
 
 public struct SpectrumPrice: Codable {
   public var price: String
@@ -62,23 +51,24 @@ public struct SpectrumPrice: Codable {
 
 ```
 
-Loading a recipe or a product
------------------------------
-
-Existing recipes can be loaded by calling loadRecipe and products can be loaded by calling loadSku. Both expect a SpectrumArguments object:
+Then, in the implementing ViewController setup the delegate and initialize the customizer. Internally the SpectrumCustomizerView has an HTML page that implements the necessary methods that Spectrum needs to interact with the host environment. There are two ways to initialize the customizer, either by a SKU or a Spectrum recipe ID.
 
 ```swift
 
-// recipe
-let arg = SpectrumArguments(fromRecipeId: "P2LD123")
-spectrum.loadRecipe(args: arg)
+@IBOutlet weak var spectrum: SpectrumCustomizerView!
 
-// Product
-let arg = SpectrumArguments(fromSku: "example-pro-product-1")
-spectrum.loadSku(args: arg)
+override func viewDidLoad() {
+  spectrum.delegate = self
+
+  // By sku. customizerUrl is a string url that points to the Spectrum Customizer Javascript:
+  spectrum.loadSku(sku: product2, customizerUrl: customizerUrl)
+
+  // or by recipe
+
+  spectrum.loadRecipe(recipeId: recipeId, customizerUrl: customizerUrl)
+}
 
 ```
-
 
 Example Implementation
 ----------------------

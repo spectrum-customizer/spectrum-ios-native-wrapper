@@ -25,9 +25,9 @@
          window.spectrumAddToCart = function(skus, recipeSetId, options) {
 
            let cartData = {
-             skus: skus,
+             skus: Array.isArray(skus) ? skus : [skus],
              recipeSetId: recipeSetId,
-             options: options
+             options: typeof options === 'undefined' ? {} : escapeOptions(options)
            };
 
            if (typeof window.SpectrumNative !== 'undefined') {
@@ -51,7 +51,7 @@
              const priceData = {
                callbackId: callbackId,
                skus: skus,
-               options: options
+               options: escapeOptions(options)
              };
 
              if (typeof window.SpectrumNative !== 'undefined') {
@@ -63,6 +63,17 @@
              }
            });
          }
+
+          function escapeOptions(options) {
+            let result = {};
+            for (let key in options) {
+              if (options.hasOwnProperty(key)) {
+                let opt = options[key];
+                result[key] = typeof opt !== "string" ? JSON.stringify(opt) : opt;
+              }
+            }
+            return result;
+          }
 
          function resolvePrice(callbackId, prices) {
            if (window.pendingPriceUpdates.hasOwnProperty(callbackId)) {

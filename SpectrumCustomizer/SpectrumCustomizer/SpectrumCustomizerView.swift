@@ -26,6 +26,8 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
 
   let nibName = "SpectrumCustomizerView"
 
+  var customizerProduct = ""
+  var customizerRecipe = ""
   var customizerSource = ""
   var webViewReady = false
   var webSourceLoaded = false
@@ -41,8 +43,9 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
   }
 
   public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    webViewReady = true
     if !webSourceLoaded && customizerSource != "" {
-      load(customizerUrl: customizerSource)
+      load()
       webSourceLoaded = true
     }
   }
@@ -58,63 +61,50 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
 
     webView.navigationDelegate = self;
     webView.configuration.userContentController.add(self, name: addToCart)
-     webView.configuration.userContentController.add(self, name: getPrice)
+    webView.configuration.userContentController.add(self, name: getPrice)
     guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
     webView.loadFileURL(url, allowingReadAccessTo: url)
   }
 
-  public func loadCustomizer(customizerUrl: String) {
+  public func loadRecipe(recipeId: String, customizerUrl: String) {
+
+    customizerSource = customizerUrl;
+    customizerProduct = "";
+    customizerRecipe = recipeId;
+
     if webViewReady {
-      load(customizerUrl: customizerUrl)
-      webSourceLoaded = true
-    } else {
-      customizerSource = customizerUrl
+      webSourceLoaded = false
+      webViewReady = false
+      webView.reload()
     }
   }
 
-  public func loadRecipe(args: SpectrumArguments) {
+  func load() {
+    var script = ""
 
-    let jsonEncoder = JSONEncoder();
-
-    do {
-      let jsonData = try jsonEncoder.encode(args)
-      let jString = String(data: jsonData, encoding: .utf8)
-
-      let serialized = "spectrum.loadRecipe('\(jString!)')"
-
-      webView.evaluateJavaScript(serialized, completionHandler: {(html: AnyObject?, error: NSError?) in
-        print(html!)
-        } as? (Any?, Error?) -> Void)
-
-    } catch {
-      print("error loading recipe")
+    if customizerProduct != "" {
+      script = "window.history.replaceState({}, 'new product', '?'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
     }
-  }
+    else if customizerRecipe != "" {
+      script = "window.history.replaceState({}, 'new recipe', '?recipeId=\(customizerRecipe)'); loadCustomizer('\(customizerSource)')"
+    }
 
-  func load(customizerUrl: String) {
-    let script = "loadCustomizer('" + customizerUrl + "')"
        webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
            print(html!)
        } as? (Any?, Error?) -> Void)
   }
   /**
    */
-  public func loadSku(args: SpectrumArguments) {
+  public func loadSku(sku: String, customizerUrl: String) {
 
-    let jsonEncoder = JSONEncoder();
+    customizerSource = customizerUrl;
+    customizerProduct = sku;
+    customizerRecipe = ""
 
-    do {
-      let jsonData = try jsonEncoder.encode(args)
-      let jString = String(data: jsonData, encoding: .utf8)
-
-      let serialized = "spectrum.loadSku('\(jString!)')"
-
-      webView.evaluateJavaScript(serialized, completionHandler: {(html: AnyObject?, error: NSError?) in
-        print(html!)
-        } as? (Any?, Error?) -> Void)
-
-    } catch {
-      print("error loading recipe")
+    if webViewReady {
+      webSourceLoaded = false
+      webViewReady = false
+      webView.reload()
     }
   }
 

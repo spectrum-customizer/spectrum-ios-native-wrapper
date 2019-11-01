@@ -10,40 +10,39 @@ import UIKit
 import SpectrumCustomizer
 
 class ViewController: UIViewController, SpectrumCustomizerViewDelegate {
-  
+
+  let customizerUrl = "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/app.js"
+  let product1 = "example-pro-product-1"
+  let product2 = "example-pro-product-2"
+  let recipeId = "BDTFLYW6"
+
   @IBOutlet weak var readableId: UITextField!
   @IBOutlet weak var spectrum: SpectrumCustomizerView!
   @IBAction func loadRecipe(_ sender: Any) {
-    
-    let arg = SpectrumArguments(fromRecipeId: "P2LD" + String(Int.random(in: 10 ... 99)) + "W")
-    spectrum.loadRecipe(args: arg)
+    spectrum.loadRecipe(recipeId: recipeId, customizerUrl: customizerUrl)
   }
-  
+
   @IBAction func loadFirstSku(_ sender: Any) {
-    let product = "example-pro-product-1"
-    let arg = SpectrumArguments(fromSku: product)
-    spectrum.loadSku(args: arg)
+    spectrum.loadSku(sku: product1, customizerUrl: customizerUrl)
   }
-  
+
   @IBAction func loadSkuTwo(_ sender: Any) {
-    let product = "example-pro-product-2"
-    let arg = SpectrumArguments(fromSku: product)
-    spectrum.loadSku(args: arg)
+    spectrum.loadSku(sku: product2, customizerUrl: customizerUrl)
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     spectrum.delegate = self
-    spectrum.loadCustomizer(customizerUrl: "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/app.js")
+    spectrum.loadSku(sku: product1, customizerUrl: customizerUrl)
   }
-  
+
   func addToCart(sender: SpectrumCustomizerView, skus: [String], recipeSetId: String, options: [String : String]) {
      print("In View Controller")
      print(skus)
      print(recipeSetId)
      print(options)
    }
-   
+
    func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice] {
     let prices = [ "sku1": SpectrumPrice(price: "$" + String(Int.random(in: 50 ... 100)) + ".00", inStock: true)]
     return prices
