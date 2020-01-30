@@ -9,12 +9,14 @@ The Spectrum Customizer library provides a wrapper around a UIView with helper m
 Adding the library to a project
 -------------------------------
 
-First, download the project from https://github.com/spectrum-customizer/spectrum-ios-native-wrapper. Then, in XCode:
+Install using cocoapods:
 
-1. Click on the project
-2. Click on embedded binaries
-3. Navigate to the Spectrum Customizer project
-4. Click Add XCode project
+```ruby
+target 'App' do
+  pod 'SpectrumCustomizer', '~> 1.0'
+end
+```
+
 
 Adding a SpectrumView in Interface Builder
 ------------------------------------------
