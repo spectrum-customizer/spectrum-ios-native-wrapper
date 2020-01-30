@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public struct SpectrumPrice: Codable {
   public var price: String
   public var inStock: Bool

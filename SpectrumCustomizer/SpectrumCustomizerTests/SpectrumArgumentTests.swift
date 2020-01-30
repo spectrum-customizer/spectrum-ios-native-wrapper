@@ -25,20 +25,20 @@ class SpectrumArgumentTests: XCTestCase {
   }
   
   func test_Existence() {
-    let arg = SpectrumArguments(containerSelector: selector, recipeSetReadableId: readableId, productId: productId)
+    let arg = SpectrumArguments(fromRecipeId: readableId)
     XCTAssertNotNil(arg)
   }
   
   
   func test_ItShouldImplementCodable() {
-    let arg = SpectrumArguments(containerSelector: selector, recipeSetReadableId: readableId, productId: productId)
+    let arg = SpectrumArguments(fromRecipeId: readableId)
     
     let jsonEncoder = JSONEncoder()
     
     do {
       let jsonData = try jsonEncoder.encode(arg)
       let jString = String(data: jsonData, encoding: .utf8)
-      XCTAssertEqual(jString!, "{\"containerSelector\":\"#main\",\"recipeSetReadableId\":\"ABCD123\",\"productId\":\"test-sku\"}")
+      XCTAssertEqual(jString!, "{\"containerSelector\":\"\",\"recipeSetReadableId\":\"ABCD123\",\"productId\":\"\"}")
     } catch {
       XCTFail("Unable to serialize SpectrumArgument")
     }

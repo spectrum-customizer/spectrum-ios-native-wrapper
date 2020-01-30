@@ -51,7 +51,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
   }
 
   private func setUpView() {
-    guard let bundle = Bundle(identifier: "com.SpectrumCustomizer") else { return }
+    let bundle = Bundle(for: SpectrumCustomizerView.self)
 
     bundle.loadNibNamed("SpectrumCustomizerView", owner: self, options: nil)
 
