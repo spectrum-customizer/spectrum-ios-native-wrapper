@@ -13,7 +13,7 @@ Install using cocoapods:
 
 ```ruby
 target 'App' do
-  pod 'SpectrumCustomizer', '~> 1.0'
+  pod 'SpectrumCustomizer', '~> 1.1.0'
 end
 ```
 
