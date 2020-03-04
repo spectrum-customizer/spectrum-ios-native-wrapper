@@ -41,6 +41,9 @@ class ViewController: UIViewController, SpectrumCustomizerViewDelegate {
      print(skus)
      print(recipeSetId)
      print(options)
+     if let angle = options["north"] {
+       print(angle)
+     }
    }
 
    func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice] {
