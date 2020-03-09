@@ -33,9 +33,11 @@
            } else {
              safeOptions = escapeOptions(options);
            }
-           
+
+           let skuData = Array.isArray(skus) ? skus : [skus];
+
            let cartData = {
-             skus: Array.isArray(skus) ? skus : [skus],
+             skus: skuData.map(sku => typeof sku === 'undefined' ? '' : sku),
              recipeSetId: recipeSetId,
              options: safeOptions
            };
@@ -83,7 +85,7 @@
             return result;
           }, {});
         }
-          
+
           function escapeOptions(options) {
             let result = {};
             for (let key in options) {
@@ -98,7 +100,7 @@
             }
             return result;
           }
-          
+
           function extractAngles(viewAngles, result) {
             for (let key in viewAngles) {
               result[key] = viewAngles[key];
