@@ -14,7 +14,7 @@ let getPrice = "getPrice"
 
 public protocol SpectrumCustomizerViewDelegate: class {
   func addToCart(sender: SpectrumCustomizerView, skus: [String], recipeSetId: String, options: [String: String])
-  func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice]
+  func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [SpectrumPrice]
 }
 
 public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
@@ -66,10 +66,10 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
     webView.loadFileURL(url, allowingReadAccessTo: url)
   }
 
-  public func loadRecipe(recipeId: String, customizerUrl: String) {
+  public func loadRecipe(recipeId: String, customizerUrl: String, sku: String = "") {
 
     customizerSource = customizerUrl;
-    customizerProduct = "";
+    customizerProduct = sku;
     customizerRecipe = recipeId;
 
     if webViewReady {
@@ -82,16 +82,16 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
   func load() {
     var script = ""
 
-    if customizerProduct != "" {
+    if customizerRecipe != "" {
+      script = "window.history.replaceState({}, 'new recipe', '?recipeId=\(customizerRecipe)'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
+    } else if customizerProduct != "" {
       script = "window.history.replaceState({}, 'new product', '?'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
     }
-    else if customizerRecipe != "" {
-      script = "window.history.replaceState({}, 'new recipe', '?recipeId=\(customizerRecipe)'); loadCustomizer('\(customizerSource)')"
-    }
 
-       webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
-           print(html!)
-       } as? (Any?, Error?) -> Void)
+
+    webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
+      print(html!)
+    } as? (Any?, Error?) -> Void)
   }
   /**
    */

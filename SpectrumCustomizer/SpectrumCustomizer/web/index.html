@@ -17,7 +17,6 @@
 </script>
 
 <script>
-
          window.customizerWrapperId = 'spectrum-customizer';
 
          window.pendingPriceUpdates = {};
@@ -59,11 +58,20 @@
                resolve: resolve,
                reject: reject
              };
+             let skuData = Array.isArray(skus) ? skus : [skus];
+             skuData = skuData.map(sku =>  {
+               let result = typeof sku === 'undefined' ? '' : sku;
+               if (result === '' && window.spectrumLoadProduct !== '' && window.spectrumLoadProduct !== null) {
+                 result = window.spectrumLoadProduct;
+               }
+               return result;
+
+             });
 
              const priceData = {
                callbackId: callbackId,
-               skus: skus,
-               options: escapeOptions(options)
+               skus: skuData,
+               options: typeof options === 'undefined' ? {} : escapeOptions(options)
              };
 
              if (typeof window.SpectrumNative !== 'undefined') {
@@ -120,8 +128,17 @@
          window.loadCustomizer = function (script) {
            let elem = document.createElement('script');
            elem.src = script;
+           elem.onload = function() {
+             if (window.spectrumInit) {
+               window.spectrumInit();
+             }
+           };
            document.getElementsByTagName('body')[0].append(elem);
          }
+
+         window.spectrumThrowError = function (err) {
+           console.error(err);
+         };
 
         </script>
 </body>

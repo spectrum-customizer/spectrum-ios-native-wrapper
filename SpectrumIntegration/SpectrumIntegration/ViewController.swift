@@ -33,6 +33,7 @@ class ViewController: UIViewController, SpectrumCustomizerViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     spectrum.delegate = self
+    spectrum.loadRecipe(recipeId: recipeId, customizerUrl: customizerUrl, sku: product1)
     spectrum.loadSku(sku: product1, customizerUrl: customizerUrl)
   }
 
@@ -46,8 +47,9 @@ class ViewController: UIViewController, SpectrumCustomizerViewDelegate {
      }
    }
 
-   func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice] {
-    let prices = [ "sku1": SpectrumPrice(price: "$" + String(Int.random(in: 50 ... 100)) + ".00", inStock: true)]
-    return prices
+   func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [SpectrumPrice] {
+    return skus.map({ (sku) -> SpectrumPrice in
+      SpectrumPrice(sku: sku, price: "$99.00", inStock: true)
+    })
    }
 }

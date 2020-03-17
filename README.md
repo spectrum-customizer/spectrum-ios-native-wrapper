@@ -13,7 +13,7 @@ Install using cocoapods:
 
 ```ruby
 target 'App' do
-  pod 'SpectrumCustomizer', '~> 1.1.1'
+  pod 'SpectrumCustomizer', '~> 2.0.0'
 end
 ```
 
@@ -32,7 +32,7 @@ Implementing SpectrumViewDelegate is necessary in order to add an item to the ca
 
 public protocol SpectrumCustomizerViewDelegate: class {
   func addToCart(sender: SpectrumCustomizerView, skus: [String], recipeSetId: String, options: [String: String])
-  func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [String: SpectrumPrice]
+  func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [SpectrumPrice]
 }
 
 ```
@@ -42,10 +42,12 @@ Here is the implementation of SpectrumPrice:
 ```swift
 
 public struct SpectrumPrice: Codable {
-  public var price: String
+  public var sku: String
+  public var price: Decimal
   public var inStock: Bool
 
-  public init(price: String, inStock: Bool) {
+  public init(sku: String, price: Decimal, inStock: Bool) {
+    self.sku = sku
     self.price = price
     self.inStock = inStock
   }
@@ -65,9 +67,9 @@ override func viewDidLoad() {
   // By sku. customizerUrl is a string url that points to the Spectrum Customizer Javascript:
   spectrum.loadSku(sku: product2, customizerUrl: customizerUrl)
 
-  // or by recipe
+  // or by recipe (sku is optional depending on implementation)
 
-  spectrum.loadRecipe(recipeId: recipeId, customizerUrl: customizerUrl)
+  spectrum.loadRecipe(recipeId: recipeId, customizerUrl: customizerUrl, sku: product2)
 }
 
 ```
