@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A0EC6D9234E3FC700B267BF /* SpectrumPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */; };
 		3A36D25C230C6C6A00A50CDF /* SpectrumCustomizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */; };
+		3A4DEED62473253A002FFF89 /* SpectrumImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DEED52473253A002FFF89 /* SpectrumImage.swift */; };
+		3A4DEED824733D28002FFF89 /* SpectrumUploadedAssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DEED724733D28002FFF89 /* SpectrumUploadedAssetModel.swift */; };
 		3AC80981230B47A0007680E6 /* SpectrumCustomizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC80977230B47A0007680E6 /* SpectrumCustomizer.framework */; };
 		3AC80986230B47A0007680E6 /* SpectrumCustomizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC80985230B47A0007680E6 /* SpectrumCustomizerTests.swift */; };
 		3AC80988230B47A0007680E6 /* SpectrumCustomizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC8097A230B47A0007680E6 /* SpectrumCustomizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumPrice.swift; sourceTree = "<group>"; };
 		3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpectrumCustomizerView.xib; sourceTree = "<group>"; };
+		3A4DEED52473253A002FFF89 /* SpectrumImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumImage.swift; sourceTree = "<group>"; };
+		3A4DEED724733D28002FFF89 /* SpectrumUploadedAssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumUploadedAssetModel.swift; sourceTree = "<group>"; };
 		3AC80977230B47A0007680E6 /* SpectrumCustomizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectrumCustomizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC8097A230B47A0007680E6 /* SpectrumCustomizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpectrumCustomizer.h; sourceTree = "<group>"; };
 		3AC8097B230B47A0007680E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 				3A36D25B230C6C6A00A50CDF /* SpectrumCustomizerView.xib */,
 				3AE8FDFD23149652006583D5 /* SpectrumArguments.swift */,
 				3A0EC6D8234E3FC700B267BF /* SpectrumPrice.swift */,
+				3A4DEED52473253A002FFF89 /* SpectrumImage.swift */,
+				3A4DEED724733D28002FFF89 /* SpectrumUploadedAssetModel.swift */,
 			);
 			path = SpectrumCustomizer;
 			sourceTree = "<group>";
@@ -230,7 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4DEED62473253A002FFF89 /* SpectrumImage.swift in Sources */,
 				3A0EC6D9234E3FC700B267BF /* SpectrumPrice.swift in Sources */,
+				3A4DEED824733D28002FFF89 /* SpectrumUploadedAssetModel.swift in Sources */,
 				3AC80992230B47ED007680E6 /* SpectrumCustomizerView.swift in Sources */,
 				3AE8FDFE23149652006583D5 /* SpectrumArguments.swift in Sources */,
 			);

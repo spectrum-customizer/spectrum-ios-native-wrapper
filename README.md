@@ -33,6 +33,7 @@ Implementing SpectrumViewDelegate is necessary in order to add an item to the ca
 public protocol SpectrumCustomizerViewDelegate: class {
   func addToCart(sender: SpectrumCustomizerView, skus: [String], recipeSetId: String, options: [String: String])
   func getPrice(sender: SpectrumCustomizerView, skus: [String], options: [String: String]) -> [SpectrumPrice]
+  func getImage(sender: SpectrumCustomizerView)
 }
 
 ```
@@ -55,6 +56,42 @@ public struct SpectrumPrice: Codable {
 
 ```
 
+Finally, to upload images the ViewController needs to provide an implementation for the `getImage(sender: SpectrumCustomizerView)` delegate method. This method will be called when the user requests an image upload. The View Controller would allow a user to select an image using a UIImagePickerControler. The SpectrumCustomizerView provides two methods for handling images:
+
+```swift
+func loadImage(image: UIImage) // Return the selected image to the customizer
+func cancelImageUpload() // Cancel current image upload.
+```
+
+Here is a simple example implementation:
+```swift
+func getImage(sender: SpectrumCustomizerView) {
+    let imagePicker = UIImagePickerController()
+    imagePicker.delegate = self
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+// UIImagePickerControllerDelegate methods
+internal func imagePickerController(_ picker:UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    if let pickedImage = info[.originalImage] as? UIImage {
+        spectrum.loadImage(image: pickedImage)
+    } else {
+        spectrum.cancelImageUpload()
+    }
+    picker.dismiss(animated: true, completion: nil)
+}
+
+internal func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    spectrum.cancelImageUpload()
+    picker.dismiss(animated: true, completion: nil)
+}
+
+```
+
 Then, in the implementing ViewController setup the delegate and initialize the customizer. Internally the SpectrumCustomizerView has an HTML page that implements the necessary methods that Spectrum needs to interact with the host environment. There are two ways to initialize the customizer, either by a SKU or a Spectrum recipe ID.
 
 ```swift
@@ -73,6 +110,8 @@ override func viewDidLoad() {
 }
 
 ```
+
+
 
 Example Implementation
 ----------------------
