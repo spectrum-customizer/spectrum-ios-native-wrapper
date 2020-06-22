@@ -29,6 +29,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
   var customizerProduct = ""
   var customizerRecipe = ""
   var customizerSource = ""
+  var sourceUrl = ""
   var webViewReady = false
   var webSourceLoaded = false
 
@@ -63,6 +64,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
     webView.configuration.userContentController.add(self, name: addToCart)
     webView.configuration.userContentController.add(self, name: getPrice)
     guard let url = bundle.url(forResource: "index", withExtension: "html", subdirectory: nil) else { return }
+    sourceUrl = url.absoluteString
     webView.loadFileURL(url, allowingReadAccessTo: url)
   }
 
@@ -83,9 +85,9 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
     var script = ""
 
     if customizerRecipe != "" {
-      script = "window.history.replaceState({}, 'new recipe', '?recipeId=\(customizerRecipe)'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
+      script = "window.history.replaceState({}, 'new recipe', '\(sourceUrl)?recipeId=\(customizerRecipe)'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
     } else if customizerProduct != "" {
-      script = "window.history.replaceState({}, 'new product', '?'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
+      script = "window.history.replaceState({}, 'new product', '\(sourceUrl)'); window.spectrumLoadProduct='\(customizerProduct)'; loadCustomizer('\(customizerSource)')"
     }
 
 
