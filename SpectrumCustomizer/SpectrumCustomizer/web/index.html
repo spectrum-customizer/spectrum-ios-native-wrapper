@@ -20,8 +20,6 @@
          window.customizerWrapperId = 'spectrum-customizer';
 
          window.pendingPriceUpdates = {};
-         window.pendingImageUpdate;
-         window.hasPendingImage = false;
 
          window.spectrumAddToCart = function(skus, recipeSetId, options) {
 
@@ -85,87 +83,6 @@
              }
            });
          }
-
-         window.spectrumGetPendingImage = function spectrumGetPendingImage() {
-
-           if (hasPendingImage && window.pendingImage !== null) {
-             return window.pendingImage;
-           } else {
-             window.pendingImage = new Promise((resolve, reject) => {
-                if (window.webkit && typeof window.webkit.messageHandlers.getPendingImage !== 'undefined') {
-                  window.pendingImageUpdate = {
-                    resolve: resolve,
-                    reject: reject
-                  };
-                  window.webkit.messageHandlers.getPendingImage.postMessage('');
-                } else {
-                  reject();
-                }
-             });
-             return window.pendingImage
-             .then(data => {
-               if (!data) {
-                 return;
-               }
-               let localState = localStorage.getItem(data.storageKey);
-               if (localState) {
-                 let savedState = JSON.parse(localState);
-                 let state = savedState.find(s => s.productHandle === data.productHandle);
-                 let feature = state.features.find(f => f.featureHandle === data.featureHandle);
-                 if (feature && data.response.length > 0) {
-                   let uploadUri = data.response.length > 1 ? data.response[1].uri : data.response[0].uri;
-                   feature.valueString = uploadUri;
-
-                   let image = state.images.find(i => i.url === uploadUri);
-                   if (typeof image === 'undefined') {
-                     state.images.push({
-                       url: uploadUri,
-                       height: data.height,
-                       width: data.width,
-                       rotation: 0,
-                       scale: 1,
-                       userScale: 1
-                     });
-                   }
-                 }
-                 localStorage.setItem(data.storageKey, JSON.stringify(savedState));
-               }
-               return data;
-             });
-           }
-         }
-
-         window.spectrumCancelImageUpload = function () {
-           window.hasPendingImage = false;
-           if (window.pendingImageUpdate) {
-             window.pendingImageUpdate.reject();
-           }
-         };
-
-         window.spectrumClearPendingImage = function() {
-           window.hasPendingImage = false;
-         };
-
-         function spectrumGetImage(options) {
-           return new Promise((resolve, reject) => {
-              if (window.webkit && typeof window.webkit.messageHandlers.getImage !== 'undefined') {
-                window.pendingImageUpdate = {
-                  resolve: resolve,
-                  reject: reject
-                };
-                window.webkit.messageHandlers.getImage.postMessage(options);
-              } else {
-                reject();
-              }
-           });
-         }
-
-        function resolveArtwork(src) {
-          window.hasPendingImage = arguments.length !== 0;
-          if (window.pendingImageUpdate) {
-            window.pendingImageUpdate.resolve(src);
-          }
-        }
 
         function consolidateOptions(optionList) {
           return optionList.reduce((result, opt) => {
