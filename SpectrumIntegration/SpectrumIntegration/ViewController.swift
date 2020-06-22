@@ -11,7 +11,8 @@ import SpectrumCustomizer
 
 class ViewController: UIViewController, SpectrumCustomizerViewDelegate {
 
-  let customizerUrl = "https://madetoorderdev.blob.core.windows.net/spectrum-native-test/app.js"
+  let customizerUrl = "https://stospectdevwestus2.blob.core.windows.net/spectrum-native-test/app.js"
+
   let product1 = "example-pro-product-1"
   let product2 = "example-pro-product-2"
   let recipeId = "BDTFLYW6"
