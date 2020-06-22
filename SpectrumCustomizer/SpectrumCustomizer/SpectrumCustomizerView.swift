@@ -91,9 +91,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
     }
 
 
-    webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
-      print(html!)
-    } as? (Any?, Error?) -> Void)
+    webView.evaluateJavaScript(script, completionHandler: nil)
   }
   /**
    */
@@ -140,9 +138,7 @@ public class SpectrumCustomizerView: UIView, WKNavigationDelegate, WKScriptMessa
         let pricesText = String(data: pricesJson, encoding: String.Encoding.utf8) {
 
         let script = "resolvePrice(" + String(callbackId) + ", " + pricesText + ");"
-        webView.evaluateJavaScript(script, completionHandler: {(html: AnyObject?, error: NSError?) in
-        print(html!)
-        } as? (Any?, Error?) -> Void)
+        webView.evaluateJavaScript(script, completionHandler: nil)
       }
      }
    }
