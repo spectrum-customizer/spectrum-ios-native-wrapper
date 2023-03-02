@@ -17,6 +17,9 @@ let package = Package(
         .target(
             name: "SpectrumCustomizer",
             path: "SpectrumCustomizer/SpectrumCustomizer",
+            exclude: [
+                "Bundler+Extensions.swift"
+            ],
             resources: [
                 .copy("SpectrumCustomizerView.xib"),
                 .copy("web/index.html")
